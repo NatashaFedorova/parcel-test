@@ -68,3 +68,11 @@ img {
   text-decoration: none;
   color: #2a2a2a;
 }
+
+.example {
+  margin: 20px 20px;
+}
+
+.form {
+  margin-bottom: 20px;
+}
