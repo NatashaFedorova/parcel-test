@@ -1,3 +1,7 @@
+import './css/style.css';
+import NewsApiSerice from './components/news-service.js';
+import LoadMoreBtn from './components/load-more-btn.js';
+
 // ================Приклад 1======================
 // fetch('https://pokeapi.co/api/v2/pokemon/3')
 //   .then(response => {
@@ -89,4 +93,69 @@
 //     console.log(res);
 //   });
 
-// ================Приклад 4 ======================
+// ================Приклад 4 Пагінація======================
+const newsApiSerice = new NewsApiSerice();
+const loadMoreBtn = new LoadMoreBtn({
+  selector: '[data-action="load-more"]',
+  hidden: true,
+});
+
+const refs = {
+  searchForm: document.querySelector('.js-search-form'),
+  articlesContainer: document.querySelector('.js-articles-container'),
+};
+
+refs.searchForm.addEventListener('submit', onSearchForm);
+loadMoreBtn.refs.button.addEventListener('click', fetchArticles);
+
+function onSearchForm(e) {
+  e.preventDefault();
+
+  newsApiSerice.query = e.currentTarget.elements.query.value;
+
+  if (e.currentTarget.elements.query.value === '') {
+    alert('А що шукати будемо?');
+    return;
+  }
+
+  loadMoreBtn.show();
+  newsApiSerice.resetPage();
+  clearArticlesContainer();
+  fetchArticles();
+}
+
+function fetchArticles() {
+  loadMoreBtn.disable();
+  newsApiSerice.fetchArticles(searchQuery).then(article => {
+    appendArticlesNarkup(article);
+    loadMoreBtn.enable();
+  });
+}
+
+function appendArticlesNarkup(articles) {
+  refs.articlesContainer.insertAdjacentHTML(
+    'beforeend',
+    createListCard(articles)
+  );
+}
+
+function createListCard(articles) {
+  return articles.map(creatCardTemp);
+}
+
+function clearArticlesContainer() {
+  refs.articlesContainer.innerHTML = '';
+}
+
+function creatCardTemp({ url, urlToImage, title, author, description }) {
+  return `<li>
+    <a href="${url}" target="_blank" rel="noopener noreferrer">
+      <article>
+        <img src="${urlToImage}" alt="" width="480">
+        <h2>${title}</h2>
+        <p>Posted by: ${author}</p>
+        <p>${description}</p>
+      </article>
+    </a>
+  </li>`;
+}
