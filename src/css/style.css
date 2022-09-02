@@ -78,7 +78,7 @@ img {
 }
 
 /* ---------Пагінація. Дозавантаження-------- */
-body {
+/* body {
   position: absolute;
   top: 0;
   right: 0;
@@ -104,4 +104,25 @@ body {
   flex: 1;
   overflow: auto;
   list-style-type: none;
+} */
+/* -----------Приклад 8. Паралельні запит---------- */
+body {
+  margin: 16px;
+  line-height: 1.5;
+  color: #212121;
+  font-family: sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+.user-list {
+  margin: 0;
+  list-style: none;
+  padding: 24px;
+}
+
+.user-list .item:not(:last-child) {
+  margin-bottom: 16px;
 }
