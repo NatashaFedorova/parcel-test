@@ -68,76 +68,76 @@ import axios from 'axios';
 // refs.buttons.addEventListener('click', handlePageClick);
 
 // ======================Пагінація. Дозавантаження (скрол)===============
-// axios.defaults.baseURL = 'https://hn.algolia.com/api/v1';
+axios.defaults.baseURL = 'https://hn.algolia.com/api/v1';
 
-// const refs = {
-//   form: document.querySelector('.form'),
-//   list: document.querySelector('.list'),
-//   loader: document.querySelector('.loader'),
-//   loadMore: document.querySelector('.load-more'),
-// };
+const refs = {
+  form: document.querySelector('.form'),
+  list: document.querySelector('.list'),
+  loader: document.querySelector('.loader'),
+  //   loadMore: document.querySelector('.load-more'),
+};
 
-// const HITS_PER_PAGE = 40;
-// let isLoading = false;
-// let items = [];
-// let query = '';
-// let totalPages = 0;
-// let currentPage = 0;
+const HITS_PER_PAGE = 40;
+let isLoading = false;
+let items = [];
+let query = '';
+let totalPages = 0;
+let currentPage = 0;
 
-// const renderList = items => {
-//   const list = items
-//     .map(({ title, url }) => `<li><a href="${url}">${title}</a></li>`)
-//     .join('');
-//   refs.list.insertAdjacentHTML('beforeend', list);
-// };
+const renderList = items => {
+  const list = items
+    .map(({ title, url }) => `<li><a href="${url}">${title}</a></li>`)
+    .join('');
+  refs.list.insertAdjacentHTML('beforeend', list);
+};
 
-// const loaderOn = () => refs.loader.classList.add('visible');
-// const loaderOff = () => refs.loader.classList.remove('visible');
+const loaderOn = () => refs.loader.classList.add('visible');
+const loaderOff = () => refs.loader.classList.remove('visible');
 
-// const feachData = () => {
-//   isLoading = true;
-//   loaderOn();
-//   axios
-//     .get(
-//       `/search/?query=${query}&page=${currentPage}&hitsPerPage=${HITS_PER_PAGE}`
-//     )
-//     .then(({ data }) => {
-//       items = [...items, data.hits];
-//       totalPages = data.nbPages;
-//       renderList(data.hits);
-//     })
-//     .catch(error => console.log(error.massage))
-//     .finally(() => {
-//       loaderOff();
-//       isLoading = false;
-//     });
-// };
+const feachData = () => {
+  isLoading = true;
+  loaderOn();
+  axios
+    .get(
+      `/search/?query=${query}&page=${currentPage}&hitsPerPage=${HITS_PER_PAGE}`
+    )
+    .then(({ data }) => {
+      items = [...items, data.hits];
+      totalPages = data.nbPages;
+      renderList(data.hits);
+    })
+    .catch(error => console.log(error.massage))
+    .finally(() => {
+      loaderOff();
+      isLoading = false;
+    });
+};
 
-// const handleSubmit = e => {
-//   e.preventDefault();
-//   if (query === e.target.elements.query.value) return;
-//   query = e.target.elements.query.value;
-//   refs.list.innerHTML = '';
-//   currentPage = 0;
-//   items = [];
-//   if (!query) return;
-//   feachData();
-// };
+const handleSubmit = e => {
+  e.preventDefault();
+  if (query === e.target.elements.query.value) return;
+  query = e.target.elements.query.value;
+  refs.list.innerHTML = '';
+  currentPage = 0;
+  items = [];
+  if (!query) return;
+  feachData();
+};
 
 // const handleLoadMoreClick = () => {
 //   currentPage += 1;
 //   feachData();
 // };
 
-// const handleListScroll = ({ target }) => {
-//   if (
-//     target.scrollTop + target.clientHeight + 10 >= target.scrollHeight &&
-//     !isLoading
-//   ) {
-//     handleLoadMoreClick();
-//   }
-// };
+const handleListScroll = ({ target }) => {
+  if (
+    target.scrollTop + target.clientHeight + 10 >= target.scrollHeight &&
+    !isLoading
+  ) {
+    handleLoadMoreClick();
+  }
+};
 
-// refs.form.addEventListener('submit', handleSubmit);
+refs.form.addEventListener('submit', handleSubmit);
 // refs.loadMore.addEventListener('click', handleLoadMoreClick);
-// refs.list.addEventListener('scroll', handleListScroll);
+refs.list.addEventListener('scroll', handleListScroll);

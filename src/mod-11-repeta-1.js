@@ -101,19 +101,3 @@
 //     throw new Error(response.statusText);
 //   })
 //   .catch(error => console.log(error));
-
-// ================Приклад 1. try...catch========================
-const validJSON = '{"name": "Mango", "age": 3}';
-const invalidJSON = '{ щось таке повернув бекенд }';
-const validJSON2 = '{"name": "Pear", "age": 10}';
-
-console.log(JSON.parse(validJSON)); //{name: 'Mango', age: 3}
-
-try {
-  console.log(JSON.parse(validJSON)); //{name: 'Mango', age: 3}
-  console.log(JSON.parse(invalidJSON));
-  console.log('Цей код не буде виконано'); //{name: 'Mango', age: 3}
-} catch (error) {
-  console.log(error); // SyntaxError: Expected property name or '}' in JSON at position 2
-}
-console.log(JSON.parse(validJSON2)); //цей код буде виконано, навідь після помилки

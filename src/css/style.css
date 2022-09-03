@@ -39,7 +39,7 @@ img {
 }
 
 /* Article List */
-.articles {
+/* .articles {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 20px;
@@ -75,10 +75,11 @@ img {
 
 .form {
   margin-bottom: 20px;
-}
+} */
 
 /* ---------Пагінація. Дозавантаження-------- */
-/* body {
+/* ---------mod-11-vebinar-1----------------- */
+body {
   position: absolute;
   top: 0;
   right: 0;
@@ -104,9 +105,9 @@ img {
   flex: 1;
   overflow: auto;
   list-style-type: none;
-} */
+}
 /* -----------Приклад 8. Паралельні запит---------- */
-body {
+/* body {
   margin: 16px;
   line-height: 1.5;
   color: #212121;
@@ -125,4 +126,4 @@ p {
 
 .user-list .item:not(:last-child) {
   margin-bottom: 16px;
-}
+} */
